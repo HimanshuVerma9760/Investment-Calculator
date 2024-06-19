@@ -1,22 +1,4 @@
-import { useState } from "react";
-
-export default function UserInput() {
-  const [inputs, setInputs] = useState({
-    initialInvestment: 10000,
-    annualInvestment: 15000,
-    interest: 6,
-    duration: 10,
-  });
-
-  function handleChange(fieldId, newValue) {
-    setInputs((prevValues) => {
-      return {
-        ...prevValues,
-        [fieldId]: newValue,
-      };
-    });
-  }
-
+export default function UserInput({ onChange, inputs }) {
   return (
     <>
       <section id="user-input">
@@ -28,7 +10,7 @@ export default function UserInput() {
               required
               value={inputs.initialInvestment}
               onChange={(event) =>
-                handleChange("initialInvestment", event.target.value)
+                onChange("initialInvestment", event.target.value)
               }
             />
           </p>
@@ -39,7 +21,7 @@ export default function UserInput() {
               required
               value={inputs.annualInvestment}
               onChange={(event) =>
-                handleChange("annualInvestment", event.target.value)
+                onChange("annualInvestment", event.target.value)
               }
             />
           </p>
@@ -51,7 +33,7 @@ export default function UserInput() {
               type="number"
               required
               value={inputs.interest}
-              onChange={(event) => handleChange("interest", event.target.value)}
+              onChange={(event) => onChange("interest", event.target.value)}
             />
           </p>
           <p>
