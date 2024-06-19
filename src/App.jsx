@@ -5,17 +5,17 @@ import { useState } from "react";
 
 function App() {
   const [inputs, setInputs] = useState({
-    initialInvestment: 10000,
-    annualInvestment: 15000,
+    initialInvestment: 15000,
+    annualInvestment: 1200,
     expectedReturn: 6,
     duration: 10,
   });
-
+  const isValidInput = inputs.duration > 0 ? true : false;
   function handleChange(fieldId, newValue) {
     setInputs((prevValues) => {
       return {
         ...prevValues,
-        [fieldId]: newValue,
+        [fieldId]: +newValue, // this + sign will force the system to treat it as a number and not a string
       };
     });
   }
@@ -24,7 +24,11 @@ function App() {
     <>
       <Header />
       <UserInput inputs={inputs} onChange={handleChange} />
-      <Results inputs={inputs}/>
+      {isValidInput ? (
+        <Results inputs={inputs} />
+      ) : (
+        <p className="center">Invalid Input (duration must be atleast 1)</p>
+      )}
     </>
   );
 }
